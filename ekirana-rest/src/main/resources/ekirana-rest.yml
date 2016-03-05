@@ -1,4 +1,4 @@
- server:
+server:
   contextPath: /ekirana/rest
   port: 1212
 
