@@ -1,0 +1,9 @@
+ server:
+  contextPath: /ekirana/rest
+  port: 1212
+
+spring:
+  freemarker:
+    checkTemplateLocation: false
+  velocity:
+    checkTemplateLocation: false

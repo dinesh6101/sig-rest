@@ -1,0 +1,9 @@
+ server:
+  contextPath: /matrimonial/rest
+  port: 1414
+
+spring:
+  freemarker:
+    checkTemplateLocation: false
+  velocity:
+    checkTemplateLocation: false

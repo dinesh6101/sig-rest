@@ -1,0 +1,9 @@
+ server:
+  contextPath: /mschool/rest
+  port: 1616
+
+spring:
+  freemarker:
+    checkTemplateLocation: false
+  velocity:
+    checkTemplateLocation: false
