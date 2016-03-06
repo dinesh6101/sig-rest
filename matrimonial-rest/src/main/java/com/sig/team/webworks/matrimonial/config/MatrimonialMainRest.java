@@ -10,11 +10,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sig.team.webworks.matrimonial.RestBasePackage;
-import com.sig.team.webworks.matrimonial.crud.entity.EntiryBasePackage;
 import com.sig.team.webworks.matrimonial.crud.repository.RepositoryBasePackage;
 
 @SpringBootApplication
-@EntityScan(basePackageClasses = EntiryBasePackage.class)
+@EntityScan("com.sig.team.webworks.matrimonial")
 @EnableJpaRepositories(basePackageClasses = RepositoryBasePackage.class)
 @ComponentScan(basePackageClasses = RestBasePackage.class)
 @PropertySource("classpath:db.properties")

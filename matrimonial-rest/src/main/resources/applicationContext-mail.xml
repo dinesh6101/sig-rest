@@ -32,10 +32,10 @@
 	    <property name="cacheStorage" ref="cacheStorage"/>
 	</bean>
 	
-	<bean id="mailHelper" class="com.sig.team.webworks.ekirana.mail.MailHelper">
+	<!-- <bean id="mailHelper" class="com.sig.team.webworks.ekirana.mail.MailHelper">
 		<constructor-arg name="templateBaseDir" value="${mail.templates.location}"/>
 	    <constructor-arg name="mailSender" ref="mailSender" />
 	    <constructor-arg name="templateMessage" ref="templateMessage" />
 	    <constructor-arg name="freemarkerConfig" ref="freemarkerConfig" />
-	</bean>
+	</bean> -->
  </beans>

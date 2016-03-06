@@ -45,7 +45,7 @@
 		</property>
 	</bean>
 
-	<bean id="applicationProperties" class="com.sig.team.webworks.ekirana.rest.util.ApplicationEnvironment">
+	<!-- <bean id="applicationProperties" class="com.sig.team.webworks.ekirana.rest.util.ApplicationEnvironment">
 		<property name="locations">
 			<list>
 				<value>classpath:application.properties</value>
@@ -60,5 +60,5 @@
 				<entry key="environment" value-ref="applicationProperties" />
 			</map>
 		</property>
-	</bean>
+	</bean> -->
 </beans>

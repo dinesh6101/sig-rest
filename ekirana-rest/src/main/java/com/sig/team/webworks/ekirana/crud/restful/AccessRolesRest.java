@@ -1,5 +1,12 @@
 package com.sig.team.webworks.ekirana.crud.restful;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,11 +20,13 @@ import com.sig.team.webworks.ekirana.crud.repository.AccessRolesRepository;
 import com.sig.team.webworks.ekirana.rest.exception.RestException;
 
 @RestController
+@Api(value = "AccessRolesRest")
 public class AccessRolesRest {
 
 	@Autowired
 	private AccessRolesRepository accessRolesRepository;
 
+	@ApiOperation(value = "Get Available Access Roles Of User", httpMethod = "GET", notes = "Fetch the available access roles", response = AccessRoles.class)
 	@RequestMapping(value = "/accessRoles", method = RequestMethod.GET)
 	public @ResponseBody Object accessRoles() throws RestException {
 		return accessRolesRepository.findAll();
@@ -37,5 +46,5 @@ public class AccessRolesRest {
 	public @ResponseBody Object save(@RequestBody AccessRoles entity) throws RestException {
 		return accessRolesRepository.save(entity);
 	}
-	
+
 }

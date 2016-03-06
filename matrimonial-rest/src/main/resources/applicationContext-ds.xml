@@ -33,7 +33,7 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
-	<jpa:repositories base-package="com.sig.team.webworks.ekirana.crud.repository" />
+	<jpa:repositories base-package="com.sig.team.webworks.matrimonial.crud.repository" />
 
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerentityManagerFactory">

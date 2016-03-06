@@ -1,4 +1,4 @@
- server:
+server:
   contextPath: /matrimonial/rest
   port: 1414
 

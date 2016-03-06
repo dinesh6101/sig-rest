@@ -1,4 +1,4 @@
-package com.sig.team.webworks.ekirana.config;
+package com.sig.team.webworks.matrimonial.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,8 +15,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * 
  * @author Dinesh B
  * 
- * http://localhost:1212/ekirana/rest/v2/api-docs
- * http://localhost:1212/ekirana/rest/swagger-ui.html
+ * http://localhost:1414/matrimonial/rest/v2/api-docs
+ * http://localhost:1414/matrimonial/rest/swagger-ui.html
  *
  *
 * @Api

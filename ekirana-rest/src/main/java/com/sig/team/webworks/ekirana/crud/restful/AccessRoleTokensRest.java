@@ -1,5 +1,8 @@
 package com.sig.team.webworks.ekirana.crud.restful;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,11 +17,13 @@ import com.sig.team.webworks.ekirana.crud.repository.AccessRoleTokensRepository;
 import com.sig.team.webworks.ekirana.rest.exception.RestException;
 
 @RestController
+@Api(value = "Access Role Tokens")
 public class AccessRoleTokensRest {
 
 	@Resource
 	private AccessRoleTokensRepository accessRoleTokensRepository;
 
+	@ApiOperation(value = "Get available access roles tokens of user", response = AccessRoleTokens.class)
 	@RequestMapping(value = "/accessRoleTokens", method = RequestMethod.GET)
 	public @ResponseBody Object accessRoleTokens() throws RestException {
 		return accessRoleTokensRepository.findAll();
