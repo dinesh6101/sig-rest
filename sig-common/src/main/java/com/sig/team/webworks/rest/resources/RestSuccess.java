@@ -1,10 +1,10 @@
-package com.sig.team.webworks.ekirana.model.restsupport.resources;
+package com.sig.team.webworks.rest.resources;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.sig.team.webworks.ekirana.model.restsupport.RestResource;
+import com.sig.team.webworks.rest.RestResource;
 
 
 public class RestSuccess implements RestResource {

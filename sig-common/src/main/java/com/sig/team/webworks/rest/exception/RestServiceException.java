@@ -1,8 +1,8 @@
-package com.sig.team.webworks.ekirana.rest.exception;
+package com.sig.team.webworks.rest.exception;
 
 import org.springframework.http.HttpStatus;
 
-import static com.sig.team.webworks.ekirana.constants.RestConstants.*;
+import static com.sig.team.webworks.constants.RestConstants.*;
 
 public class RestServiceException extends RestException {
 

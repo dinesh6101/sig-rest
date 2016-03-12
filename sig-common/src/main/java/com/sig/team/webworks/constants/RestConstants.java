@@ -1,4 +1,4 @@
-package com.sig.team.webworks.ekirana.constants;
+package com.sig.team.webworks.constants;
 
 
 public class RestConstants {

@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
-import com.sig.team.webworks.ekirana.model.restsupport.RestResource;
+import com.sig.team.webworks.rest.RestResource;
 
 public class User implements RestResource {
 

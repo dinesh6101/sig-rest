@@ -1,8 +1,8 @@
-package com.sig.team.webworks.ekirana.model.restsupport.resources;
+package com.sig.team.webworks.rest.resources;
 
 import java.util.Collection;
 
-import com.sig.team.webworks.ekirana.model.restsupport.RestResource;
+import com.sig.team.webworks.rest.RestResource;
 
 public class RestCollection implements RestResource{
 	

@@ -1,4 +1,4 @@
-package com.sig.team.webworks.ekirana.model.restsupport.resources;
+package com.sig.team.webworks.rest.resources;
 
 public class EmptyAsyncRestResource extends AsyncRestResource {
 	

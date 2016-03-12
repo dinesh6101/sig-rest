@@ -126,6 +126,13 @@
 			<artifactId>bootstrap</artifactId>
 			<version>3.3.5</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>sig-common</groupId>
+			<artifactId>sig-common</artifactId>
+			<version>4.0.0</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>

@@ -1,4 +1,4 @@
-package com.sig.team.webworks.ekirana.model.restsupport.resources;
+package com.sig.team.webworks.rest.resources;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 

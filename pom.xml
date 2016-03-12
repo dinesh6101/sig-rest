@@ -11,6 +11,7 @@
 		<module>matrimonial-rest</module>
 		<module>ekirana-rest</module>
 		<module>mschool-rest</module>
+		<module>sig-common</module>
 	</modules>
 
 </project>

@@ -1,5 +1,6 @@
 package com.sig.team.webworks.ekirana.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -9,8 +10,12 @@ import javax.persistence.TypedQuery;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
+import com.sig.team.webworks.ekirana.Queries;
 import com.sig.team.webworks.ekirana.crud.entity.Items;
 import com.sig.team.webworks.ekirana.dao.ItemDAO;
+import com.sig.team.webworks.ekirana.model.ItemCategoryId;
+import com.sig.team.webworks.ekirana.model.ItemsInfo;
+import com.sig.team.webworks.ekirana.util.StringUtil;
 
 @Repository
 public class ItemDAOImpl implements ItemDAO {
@@ -110,4 +115,51 @@ public class ItemDAOImpl implements ItemDAO {
 		return results;
 	}
 
+	@Override
+	public ItemCategoryId getItemsName(ItemsInfo entity) {
+		ItemCategoryId itemsCategoryId = new ItemCategoryId();
+
+		List<Integer> groceryCategoryId = new ArrayList<Integer>();
+		for (String groceryCategoryName : entity.getGroceryCategoryName()) {
+			String query = Queries.GROCERY_CATEGORY_ID_BY_NAME;
+			TypedQuery<Integer> typedQuery = entityManager.createQuery(query, Integer.class);
+			typedQuery.setParameter("groceryCategoryName", StringUtil.replaceDash(groceryCategoryName));
+
+			Integer grocerycategoryid = avoidNoResultExceptionForSingleResult(typedQuery);
+			if (grocerycategoryid != null)
+				groceryCategoryId.add(grocerycategoryid);
+		}
+
+		List<Integer> itemCategryId = new ArrayList<Integer>();
+		for (String itemCategoryName : entity.getItemCategoryName()) {
+			String query = Queries.ITEM_CATEGORY_ID_BY_NAME;
+			TypedQuery<Integer> typedQuery = entityManager.createQuery(query, Integer.class);
+			typedQuery.setParameter("itemCategoryName", StringUtil.replaceDash(itemCategoryName));
+			Integer itemcategoryid = avoidNoResultExceptionForSingleResult(typedQuery);
+			if (itemcategoryid != null)
+				itemCategryId.add(itemcategoryid);
+		}
+
+		List<Integer> itemId = new ArrayList<Integer>();
+		for (String itemname : entity.getItemName()) {
+			String query = Queries.ITEM_ID_BY_NAME;
+			TypedQuery<Integer> typedQuery = entityManager.createQuery(query, Integer.class);
+			typedQuery.setParameter("itemname", StringUtil.replaceDash(itemname));
+			Integer itemid = avoidNoResultExceptionForSingleResult(typedQuery);
+			if (itemid != null)
+				itemId.add(itemid);
+		}
+		itemsCategoryId.setGroceryCategoryId(groceryCategoryId);
+		itemsCategoryId.setItemCategryId(itemCategryId);
+		itemsCategoryId.setItemId(itemId);
+		return itemsCategoryId;
+	}
+
+	private Integer avoidNoResultExceptionForSingleResult(TypedQuery<Integer> typedQuery) {
+		try {
+			return typedQuery.getSingleResult();
+		} catch (Exception e) {
+		}
+		return null;
+	}
 }

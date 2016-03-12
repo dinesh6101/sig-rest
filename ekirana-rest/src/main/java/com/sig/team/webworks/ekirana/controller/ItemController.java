@@ -32,10 +32,12 @@ import com.sig.team.webworks.ekirana.crud.repository.GroceryCategoryRepository;
 import com.sig.team.webworks.ekirana.crud.repository.ImageRepository;
 import com.sig.team.webworks.ekirana.crud.repository.ItemCategoryRepository;
 import com.sig.team.webworks.ekirana.crud.repository.ItemsRepository;
+import com.sig.team.webworks.ekirana.model.ItemCategoryId;
+import com.sig.team.webworks.ekirana.model.ItemsInfo;
 import com.sig.team.webworks.ekirana.model.ItemsWithImage;
-import com.sig.team.webworks.ekirana.rest.exception.RestException;
-import com.sig.team.webworks.ekirana.rest.exception.RestServiceException;
 import com.sig.team.webworks.ekirana.service.ItemService;
+import com.sig.team.webworks.rest.exception.RestException;
+import com.sig.team.webworks.rest.exception.RestServiceException;
 
 @RestController
 public class ItemController {
@@ -166,4 +168,8 @@ public class ItemController {
 		return itemService.searchItem(name);
 	}
 
+	@RequestMapping(value = "/getitemcategorybyid", method = RequestMethod.POST)
+	public ItemCategoryId getItemsName(@RequestBody ItemsInfo entity) throws RestException {
+		return itemService.getItemsName(entity);
+	}
 }

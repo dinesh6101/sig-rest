@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sig.team.webworks.ekirana.crud.entity.Customer;
 import com.sig.team.webworks.ekirana.crud.repository.CustomerRepository;
-import com.sig.team.webworks.ekirana.rest.exception.RestException;
+import com.sig.team.webworks.rest.exception.RestException;
 
 @RestController
 public class CustomerRest {

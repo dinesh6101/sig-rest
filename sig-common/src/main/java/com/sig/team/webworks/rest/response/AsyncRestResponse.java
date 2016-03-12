@@ -1,11 +1,12 @@
-package com.sig.team.webworks.ekirana.model.restsupport.response;
+package com.sig.team.webworks.rest.response;
 
 import java.io.Serializable;
 
 import org.springframework.http.HttpStatus;
 
-import com.sig.team.webworks.ekirana.model.restsupport.RestResource;
-import com.sig.team.webworks.ekirana.model.restsupport.resources.AsyncRestResource;
+import com.sig.team.webworks.rest.RestResource;
+import com.sig.team.webworks.rest.resources.AsyncRestResource;
+
 
 public class AsyncRestResponse implements Serializable {
 	

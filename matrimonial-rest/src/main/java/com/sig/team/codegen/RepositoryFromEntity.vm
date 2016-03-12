@@ -6,7 +6,7 @@ package com.sig.team.webworks.matrimonial.crud.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.stereotype.Repository;
 
 import com.sig.team.webworks.matrimonial.crud.entity.$domain;
 
@@ -16,7 +16,7 @@ import com.sig.team.webworks.matrimonial.crud.entity.$domain;
  * @author Dinesh
  *
  */
-@RepositoryRestResource
+@Repository
 public interface $repositoryName extends CrudRepository<$domain, Integer>, PagingAndSortingRepository<$domain, Integer>{
 
 	

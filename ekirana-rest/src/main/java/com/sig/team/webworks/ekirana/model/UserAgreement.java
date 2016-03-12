@@ -2,7 +2,7 @@ package com.sig.team.webworks.ekirana.model;
 
 import java.io.Serializable;
 
-import com.sig.team.webworks.ekirana.model.restsupport.RestResource;
+import com.sig.team.webworks.rest.RestResource;
 
 public class UserAgreement implements RestResource, Serializable{
 	

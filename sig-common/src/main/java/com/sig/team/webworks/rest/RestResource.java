@@ -1,4 +1,4 @@
-package com.sig.team.webworks.ekirana.model.restsupport;
+package com.sig.team.webworks.rest;
 
 import java.io.Serializable;
 
@@ -7,8 +7,8 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import org.codehaus.jackson.annotate.JsonTypeInfo.As;
 import org.codehaus.jackson.annotate.JsonTypeInfo.Id;
 
-import com.sig.team.webworks.ekirana.model.restsupport.resources.RestCollection;
-import com.sig.team.webworks.ekirana.model.restsupport.resources.RestLocation;
+import com.sig.team.webworks.rest.resources.RestCollection;
+import com.sig.team.webworks.rest.resources.RestLocation;
 
 @JsonTypeInfo(use = Id.NAME, include = As.PROPERTY, property = "type")
 @JsonSubTypes({

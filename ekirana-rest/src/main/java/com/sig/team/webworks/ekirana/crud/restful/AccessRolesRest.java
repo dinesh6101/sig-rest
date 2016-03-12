@@ -3,10 +3,6 @@ package com.sig.team.webworks.ekirana.crud.restful;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sig.team.webworks.ekirana.crud.entity.AccessRoles;
 import com.sig.team.webworks.ekirana.crud.repository.AccessRolesRepository;
-import com.sig.team.webworks.ekirana.rest.exception.RestException;
+import com.sig.team.webworks.rest.exception.RestException;
 
 @RestController
 @Api(value = "AccessRolesRest")

@@ -1,8 +1,8 @@
 package com.sig.team.webworks.ekirana.service;
 
 import com.sig.team.webworks.ekirana.model.AccessTokens;
-import com.sig.team.webworks.ekirana.model.restsupport.resources.RestSuccess;
-import com.sig.team.webworks.ekirana.rest.exception.RestException;
+import com.sig.team.webworks.rest.exception.RestException;
+import com.sig.team.webworks.rest.resources.RestSuccess;
 
 public interface UserService {
 

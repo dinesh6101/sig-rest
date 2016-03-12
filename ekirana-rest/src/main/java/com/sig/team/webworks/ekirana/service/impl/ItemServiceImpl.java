@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.sig.team.webworks.ekirana.crud.entity.Items;
 import com.sig.team.webworks.ekirana.dao.ItemDAO;
+import com.sig.team.webworks.ekirana.model.ItemCategoryId;
+import com.sig.team.webworks.ekirana.model.ItemsInfo;
 import com.sig.team.webworks.ekirana.service.ItemService;
 
 @Service
@@ -55,6 +57,11 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public Items getItemsDetails(String grocerycategoryname,String itemcategoryname, String itemsname) {
 		return itemDao.getItemsDetail(grocerycategoryname,itemcategoryname,itemsname);
+	}
+
+	@Override
+	public ItemCategoryId getItemsName(ItemsInfo entity) {
+		return itemDao.getItemsName(entity);
 	}
 
 	

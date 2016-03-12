@@ -1,9 +1,9 @@
-package com.sig.team.webworks.ekirana.model.restsupport.resources;
+package com.sig.team.webworks.rest.resources;
 
-import org.springframework.http.HttpStatus;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.springframework.http.HttpStatus;
 
-import com.sig.team.webworks.ekirana.model.restsupport.RestResource;
+import com.sig.team.webworks.rest.RestResource;
 
 public abstract class AsyncRestResource implements RestResource {
 

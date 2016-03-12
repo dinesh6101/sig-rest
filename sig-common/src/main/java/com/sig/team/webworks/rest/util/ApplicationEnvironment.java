@@ -1,4 +1,4 @@
-package com.sig.team.webworks.ekirana.rest.util;
+package com.sig.team.webworks.rest.util;
 
 import java.io.IOException;
 import java.util.Properties;

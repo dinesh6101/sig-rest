@@ -1,8 +1,8 @@
-package com.sig.team.webworks.ekirana.rest.exception;
+package com.sig.team.webworks.rest.exception;
 
 import java.util.List;
 
-import com.sig.team.webworks.ekirana.model.restsupport.resources.RestError;
+import com.sig.team.webworks.rest.resources.RestError;
 
 //Modified by Manoj after discussion with Amit
 //RestException extends Exception and not RuntimeException
