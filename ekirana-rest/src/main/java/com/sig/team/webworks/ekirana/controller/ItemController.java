@@ -68,8 +68,10 @@ public class ItemController {
 		return itemService.getDistinctUnit();
 	}
 
+	// yogesh
 	@RequestMapping(value = "/itemImageUpload", method = RequestMethod.POST)
-	public @ResponseBody Image itemImageUpload(MultipartFile file, HttpServletRequest request) throws RestException {
+	public @ResponseBody Image itemImageUpload(MultipartFile file,
+			HttpServletRequest request) throws RestException {
 		Image image = new Image();
 		image.setName(new Date().getTime() + "_" + file.getOriginalFilename());
 		image.setPath(ApplicationConstants.ITEM_IMAGE_PATH);
@@ -79,7 +81,8 @@ public class ItemController {
 			if (!directory.exists())
 				directory.mkdir();
 
-			FileCopyUtils.copy(file.getBytes(), new File(image.getPath(), image.getName()));
+			FileCopyUtils.copy(file.getBytes(),
+					new File(image.getPath(), image.getName()));
 			image = imageRepository.save(image);
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
@@ -91,43 +94,52 @@ public class ItemController {
 	}
 
 	@RequestMapping(value = "/groceryCategoryIgnoreDuplicate", method = RequestMethod.POST)
-	public @ResponseBody Object accessRoleAdd(@RequestBody GroceryCategory entity) throws RestException {
-		boolean isGetGroceryCategoyExist = itemService.isGetGroceryCategoyExist(entity.getGrocerycategoryname());
+	public @ResponseBody Object accessRoleAdd(
+			@RequestBody GroceryCategory entity) throws RestException {
+		boolean isGetGroceryCategoyExist = itemService
+				.isGetGroceryCategoyExist(entity.getGrocerycategoryname());
 		if (isGetGroceryCategoyExist == false) {
 			return groceryCategoryRepository.save(entity);
-		}
-		else {
+		} else {
 			String i18nMessageKey = "";
-			throw new RestServiceException(ExceptionMessages.GROCERY_CATEGORY_ALREADY_EXIST, i18nMessageKey);
+			throw new RestServiceException(
+					ExceptionMessages.GROCERY_CATEGORY_ALREADY_EXIST,
+					i18nMessageKey);
 		}
 	}
 
 	@RequestMapping(value = "/itemCategoryIgnoreDuplicate", method = RequestMethod.POST)
-	public @ResponseBody Object accessRoleAdd(@RequestBody ItemCategory entity) throws RestException {
-		boolean isGetItemCategoryExist = itemService.isGetItemCategoryExist(entity.getItemcategoryname());
+	public @ResponseBody Object accessRoleAdd(@RequestBody ItemCategory entity)
+			throws RestException {
+		boolean isGetItemCategoryExist = itemService
+				.isGetItemCategoryExist(entity.getItemcategoryname());
 		if (isGetItemCategoryExist == false) {
 			return itemCategoryRepository.save(entity);
-		}
-		else {
+		} else {
 			String i18nMessageKey = "";
-			throw new RestServiceException(ExceptionMessages.ITEM_CATEGORY_ALREADY_EXIST, i18nMessageKey);
+			throw new RestServiceException(
+					ExceptionMessages.ITEM_CATEGORY_ALREADY_EXIST,
+					i18nMessageKey);
 		}
 	}
 
 	@RequestMapping(value = "/brandIgnoreDuplicate", method = RequestMethod.POST)
-	public @ResponseBody Object accessRoleAdd(@RequestBody Brand entity) throws RestException {
-		boolean isGetBrandExist = itemService.isGetBrandExist(entity.getBrandname());
+	public @ResponseBody Object accessRoleAdd(@RequestBody Brand entity)
+			throws RestException {
+		boolean isGetBrandExist = itemService.isGetBrandExist(entity
+				.getBrandname());
 		if (isGetBrandExist == false) {
 			return brandRepository.save(entity);
-		}
-		else {
+		} else {
 			String i18nMessageKey = "";
-			throw new RestServiceException(ExceptionMessages.BRAND_NAME_ALREADY_EXIST, i18nMessageKey);
+			throw new RestServiceException(
+					ExceptionMessages.BRAND_NAME_ALREADY_EXIST, i18nMessageKey);
 		}
 	}
 
 	@RequestMapping(value = "/itemsWithImagePath", method = RequestMethod.GET)
-	public @ResponseBody Object getItemsWithImagePath(HttpServletRequest request) throws RestException {
+	public @ResponseBody Object getItemsWithImagePath(HttpServletRequest request)
+			throws RestException {
 		Map<Integer, Image> imageIdImageMap = new HashMap<Integer, Image>();
 
 		List<Image> image = (List<Image>) imageRepository.findAll();
@@ -136,14 +148,18 @@ public class ItemController {
 		}
 
 		Map<Integer, String> gidNameMap = new HashMap<Integer, String>();
-		List<GroceryCategory> groceryCategory = (List<GroceryCategory>) groceryCategoryRepository.findAll();
+		List<GroceryCategory> groceryCategory = (List<GroceryCategory>) groceryCategoryRepository
+				.findAll();
 		for (GroceryCategory obj : groceryCategory) {
-			gidNameMap.put(obj.getGrocerycategoryid(), obj.getGrocerycategoryname());
+			gidNameMap.put(obj.getGrocerycategoryid(),
+					obj.getGrocerycategoryname());
 		}
 		Map<Integer, String> itemCategoryIdNameMap = new HashMap<Integer, String>();
-		List<ItemCategory> itemCategory = (List<ItemCategory>) itemCategoryRepository.findAll();
+		List<ItemCategory> itemCategory = (List<ItemCategory>) itemCategoryRepository
+				.findAll();
 		for (ItemCategory obj : itemCategory) {
-			itemCategoryIdNameMap.put(obj.getItemcategoryid(), obj.getItemcategoryname());
+			itemCategoryIdNameMap.put(obj.getItemcategoryid(),
+					obj.getItemcategoryname());
 		}
 
 		List<Items> items = (List<Items>) itemsRepository.findAll();
@@ -151,9 +167,15 @@ public class ItemController {
 		List<ItemsWithImage> itemsWithImageList = new ArrayList<ItemsWithImage>();
 		for (Items itemsObject : items) {
 			ItemsWithImage itemsWithImage = new ItemsWithImage(itemsObject);
-			itemsWithImage.setImage(imageIdImageMap.get(itemsObject.getImageid()));
+			itemsWithImage.setImage(imageIdImageMap.get(itemsObject
+					.getImageid()));
 
-			url = "/grocery/" + gidNameMap.get(itemsObject.getGrocerycategoryid()) + "/" + itemCategoryIdNameMap.get(itemsObject.getItemcategoryid()) + "/" + itemsObject.getItemname();
+			url = "/grocery/"
+					+ gidNameMap.get(itemsObject.getGrocerycategoryid())
+					+ "/"
+					+ itemCategoryIdNameMap
+							.get(itemsObject.getItemcategoryid()) + "/"
+					+ itemsObject.getItemname();
 			url = url.replaceAll("[^a-zA-Z0-9/]", " ");
 			url = url.replaceAll("\\s+", " ").replaceAll(" ", "-");
 			url = url.toLowerCase();
@@ -164,12 +186,14 @@ public class ItemController {
 	}
 
 	@RequestMapping(value = "/searchItem", method = RequestMethod.GET)
-	public @ResponseBody List<Items> searchItem(String name) throws RestException {
+	public @ResponseBody List<Items> searchItem(String name)
+			throws RestException {
 		return itemService.searchItem(name);
 	}
 
 	@RequestMapping(value = "/getitemcategorybyid", method = RequestMethod.POST)
-	public ItemCategoryId getItemsName(@RequestBody ItemsInfo entity) throws RestException {
+	public ItemCategoryId getItemsName(@RequestBody ItemsInfo entity)
+			throws RestException {
 		return itemService.getItemsName(entity);
 	}
 }
