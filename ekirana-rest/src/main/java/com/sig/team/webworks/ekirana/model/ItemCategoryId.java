@@ -4,32 +4,31 @@ import java.util.List;
 
 public class ItemCategoryId {
 
-	private List<Integer> groceryCategoryId;
-	private List<Integer> itemCategryId;
-	private List<Integer> itemId;
+	private List<KeyAndValues> groceryCategoryId;
+	private List<KeyAndValues> itemCategryId;
+	private List<KeyAndValues> itemId;
 
-	public List<Integer> getGroceryCategoryId() {
+	public List<KeyAndValues> getGroceryCategoryId() {
 		return groceryCategoryId;
 	}
 
-	public void setGroceryCategoryId(List<Integer> groceryCategoryId) {
+	public void setGroceryCategoryId(List<KeyAndValues> groceryCategoryId) {
 		this.groceryCategoryId = groceryCategoryId;
 	}
 
-	public List<Integer> getItemCategryId() {
+	public List<KeyAndValues> getItemCategryId() {
 		return itemCategryId;
 	}
 
-	public void setItemCategryId(List<Integer> itemCategryId) {
+	public void setItemCategryId(List<KeyAndValues> itemCategryId) {
 		this.itemCategryId = itemCategryId;
 	}
 
-	public List<Integer> getItemId() {
+	public List<KeyAndValues> getItemId() {
 		return itemId;
 	}
 
-	public void setItemId(List<Integer> itemId) {
+	public void setItemId(List<KeyAndValues> itemId) {
 		this.itemId = itemId;
 	}
-
 }

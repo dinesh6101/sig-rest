@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.apache.log4j.Logger;
@@ -15,6 +16,7 @@ import com.sig.team.webworks.ekirana.crud.entity.Items;
 import com.sig.team.webworks.ekirana.dao.ItemDAO;
 import com.sig.team.webworks.ekirana.model.ItemCategoryId;
 import com.sig.team.webworks.ekirana.model.ItemsInfo;
+import com.sig.team.webworks.ekirana.model.KeyAndValues;
 import com.sig.team.webworks.ekirana.util.StringUtil;
 
 @Repository
@@ -119,46 +121,69 @@ public class ItemDAOImpl implements ItemDAO {
 	public ItemCategoryId getItemsName(ItemsInfo entity) {
 		ItemCategoryId itemsCategoryId = new ItemCategoryId();
 
-		List<Integer> groceryCategoryId = new ArrayList<Integer>();
+		List<KeyAndValues> keyAndValuesList = new ArrayList<KeyAndValues>();
 		for (String groceryCategoryName : entity.getGroceryCategoryName()) {
 			String query = Queries.GROCERY_CATEGORY_ID_BY_NAME;
-			TypedQuery<Integer> typedQuery = entityManager.createQuery(query, Integer.class);
-			typedQuery.setParameter("groceryCategoryName", StringUtil.replaceDash(groceryCategoryName));
-
-			Integer grocerycategoryid = avoidNoResultExceptionForSingleResult(typedQuery);
-			if (grocerycategoryid != null)
-				groceryCategoryId.add(grocerycategoryid);
+			Query typedQuery = entityManager.createQuery(query);
+			typedQuery.setParameter("groceryCategoryName",
+					StringUtil.replaceDash(groceryCategoryName));
+			List<Object[]> queryResult = avoidNoResultExceptionForSingleResult(typedQuery);
+			if (queryResult != null) {
+				for (Object[] keyAndValues : queryResult) {
+					KeyAndValues obj = new KeyAndValues();
+					obj.setKey(Integer.parseInt(keyAndValues[0].toString()));
+					obj.setValue(keyAndValues[1].toString());
+					keyAndValuesList.add(obj);
+				}
+			}
 		}
 
-		List<Integer> itemCategryId = new ArrayList<Integer>();
+		List<KeyAndValues> itemCategryId = new ArrayList<KeyAndValues>();
 		for (String itemCategoryName : entity.getItemCategoryName()) {
 			String query = Queries.ITEM_CATEGORY_ID_BY_NAME;
-			TypedQuery<Integer> typedQuery = entityManager.createQuery(query, Integer.class);
-			typedQuery.setParameter("itemCategoryName", StringUtil.replaceDash(itemCategoryName));
-			Integer itemcategoryid = avoidNoResultExceptionForSingleResult(typedQuery);
-			if (itemcategoryid != null)
-				itemCategryId.add(itemcategoryid);
+			Query typedQuery = entityManager.createQuery(query);
+			typedQuery.setParameter("itemCategoryName",
+					StringUtil.replaceDash(itemCategoryName));
+			List<Object[]> queryResult = avoidNoResultExceptionForSingleResult(typedQuery);
+			if (queryResult != null) {
+				for (Object[] keyAndValues : queryResult) {
+					KeyAndValues obj = new KeyAndValues();
+					obj.setKey(Integer.parseInt(keyAndValues[0].toString()));
+					obj.setValue(keyAndValues[1].toString());
+					itemCategryId.add(obj);
+				}
+			}
 		}
 
-		List<Integer> itemId = new ArrayList<Integer>();
+		List<KeyAndValues> itemId = new ArrayList<KeyAndValues>();
 		for (String itemname : entity.getItemName()) {
 			String query = Queries.ITEM_ID_BY_NAME;
-			TypedQuery<Integer> typedQuery = entityManager.createQuery(query, Integer.class);
-			typedQuery.setParameter("itemname", StringUtil.replaceDash(itemname));
-			Integer itemid = avoidNoResultExceptionForSingleResult(typedQuery);
-			if (itemid != null)
-				itemId.add(itemid);
+			Query typedQuery = entityManager.createQuery(query);
+			typedQuery.setParameter("itemname",
+					StringUtil.replaceDash(itemname));
+			List<Object[]> queryResult = avoidNoResultExceptionForSingleResult(typedQuery);
+			if (queryResult != null) {
+				for (Object[] keyAndValues : queryResult) {
+					KeyAndValues obj = new KeyAndValues();
+					obj.setKey(Integer.parseInt(keyAndValues[0].toString()));
+					obj.setValue(keyAndValues[1].toString());
+					itemId.add(obj);
+				}
+			}
 		}
-		itemsCategoryId.setGroceryCategoryId(groceryCategoryId);
+		itemsCategoryId.setGroceryCategoryId(keyAndValuesList);
 		itemsCategoryId.setItemCategryId(itemCategryId);
 		itemsCategoryId.setItemId(itemId);
 		return itemsCategoryId;
 	}
 
-	private Integer avoidNoResultExceptionForSingleResult(TypedQuery<Integer> typedQuery) {
+	private List<Object[]> avoidNoResultExceptionForSingleResult(
+			Query typedQuery) {
 		try {
-			return typedQuery.getSingleResult();
+			List<Object[]> resultList = typedQuery.getResultList();
+			return resultList;
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return null;
 	}
