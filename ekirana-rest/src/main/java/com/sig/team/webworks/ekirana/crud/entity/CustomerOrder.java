@@ -72,6 +72,25 @@ public class CustomerOrder implements Serializable
 
     @Column(name="updatedBy", length=999)
     private String     updatedby    ;
+    
+    @Column(name="comments", length=90)
+    private String     comment    ;
+    
+    @Column(name="orderConfimDate", length=90)
+    private String  orderconfirmdate    ;
+
+    
+    public String getOrderconfirmdate() {
+		return orderconfirmdate;
+	}
+
+	public void setOrderconfirmdate(String orderconfirmdate) {
+		this.orderconfirmdate = orderconfirmdate;
+	}
+
+
+	@Column(name="orderCancelDate", length=90)
+    private String  ordercanceldate    ;
 
 
     
@@ -80,7 +99,23 @@ public class CustomerOrder implements Serializable
     // ENTITY LINKS ( RELATIONSHIP )
     //----------------------------------------------------------------------
 
-    public String getOrderStatus() {
+    public String getOrdercanceldate() {
+		return ordercanceldate;
+	}
+
+	public void setOrdercanceldate(String ordercanceldate) {
+		this.ordercanceldate = ordercanceldate;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public String getOrderStatus() {
 		return orderStatus;
 	}
 

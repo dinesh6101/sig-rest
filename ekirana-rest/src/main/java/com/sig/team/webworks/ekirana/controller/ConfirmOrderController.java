@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sig.team.webworks.ekirana.dao.ConfirmOrderDao;
+ 
 
 @RestController
 public class ConfirmOrderController {
@@ -17,6 +18,7 @@ public class ConfirmOrderController {
 	private ConfirmOrderDao confirmOrderDao;
 	
 
+
 	@RequestMapping(value = "/confirmOrder", method = RequestMethod.GET)
 	@ResponseBody
 	public Integer updateConfirmOrder(@RequestParam("customerId") Integer customerId) {
@@ -24,9 +26,21 @@ public class ConfirmOrderController {
 	}	
 	
 	@RequestMapping(value = "/cancelOrder", method = RequestMethod.GET)
-	@ResponseBody
-	public Integer updateCancelOrder(@RequestParam("customerId") Integer customerId) {
-		return 0; //return confirmCancelDao.updateCancelOrder(customerId);
+	@ResponseBody public Integer updateCancelOrder(@RequestParam("customerId") Integer customerId,
+			                         @RequestParam("comments")String comments) {
+		return confirmOrderDao.updateCancelOrder(customerId,comments);
 	}
 	
+	
+	
+	
+	
 }
+ 
+    
+	
+	
+	
+	
+	
+

@@ -12,5 +12,9 @@ public class Queries {
 
 	public static final String ITEM_ID_BY_NAME = "select itemid from Items where itemname like  :itemname";
 
-	public static final String CONFIRM_ORDER = "update CustomerOrder set orderStatus = :orderStatus where customerid = :customerid";
+	public static final String CONFIRM_ORDER = "update CustomerOrder set orderStatus = :orderStatus,orderConfirmDate = :orderconfirmdate where customerid = :customerid";
+
+	public static final String CANCEL_ORDER = "update CustomerOrder set orderStatus = :orderStatus, comments = :comment, orderCancelDate = :ordercanceldate where customerid = :customerid";
+
+	
 }
