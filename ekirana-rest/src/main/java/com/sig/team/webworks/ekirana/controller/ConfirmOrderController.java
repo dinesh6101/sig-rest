@@ -15,11 +15,18 @@ public class ConfirmOrderController {
 
 	@Resource
 	private ConfirmOrderDao confirmOrderDao;
+	
 
 	@RequestMapping(value = "/confirmOrder", method = RequestMethod.GET)
 	@ResponseBody
 	public Integer updateConfirmOrder(@RequestParam("customerId") Integer customerId) {
 		return confirmOrderDao.updateConfirmOrder(customerId);
+	}	
+	
+	@RequestMapping(value = "/cancelOrder", method = RequestMethod.GET)
+	@ResponseBody
+	public Integer updateCancelOrder(@RequestParam("customerId") Integer customerId) {
+		return 0; //return confirmCancelDao.updateCancelOrder(customerId);
 	}
-
+	
 }
