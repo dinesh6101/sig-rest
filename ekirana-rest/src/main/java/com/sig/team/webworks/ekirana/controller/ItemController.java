@@ -153,7 +153,7 @@ public class ItemController {
 			ItemsWithImage itemsWithImage = new ItemsWithImage(itemsObject);
 			itemsWithImage.setImage(imageIdImageMap.get(itemsObject.getImageid()));
 
-			url = request.getContextPath() + "/grocery/" + gidNameMap.get(itemsObject.getGrocerycategoryid()) + "/" + itemCategoryIdNameMap.get(itemsObject.getItemcategoryid()) + "/" + itemsObject.getItemname();
+			url = "/grocery/" + gidNameMap.get(itemsObject.getGrocerycategoryid()) + "/" + itemCategoryIdNameMap.get(itemsObject.getItemcategoryid()) + "/" + itemsObject.getItemname();
 			url = url.replaceAll("[^a-zA-Z0-9/]", " ");
 			url = url.replaceAll("\\s+", " ").replaceAll(" ", "-");
 			url = url.toLowerCase();
