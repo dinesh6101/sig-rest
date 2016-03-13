@@ -52,6 +52,9 @@ public class CustomerOrder implements Serializable
 
     @Column(name="quantity")
     private Float      quantity     ;
+    
+    @Column(name="orderStatus", length=50)
+    private String     orderStatus    ;
 
     @Column(name="orderTrackId")
     private Integer    ordertrackid ;
@@ -71,12 +74,21 @@ public class CustomerOrder implements Serializable
     private String     updatedby    ;
 
 
+    
 
     //----------------------------------------------------------------------
     // ENTITY LINKS ( RELATIONSHIP )
     //----------------------------------------------------------------------
 
-    //----------------------------------------------------------------------
+    public String getOrderStatus() {
+		return orderStatus;
+	}
+
+	public void setOrderStatus(String orderStatus) {
+		this.orderStatus = orderStatus;
+	}
+
+	//----------------------------------------------------------------------
     // CONSTRUCTOR(S)
     //----------------------------------------------------------------------
     public CustomerOrder()

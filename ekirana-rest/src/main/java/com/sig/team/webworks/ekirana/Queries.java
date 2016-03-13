@@ -11,4 +11,6 @@ public class Queries {
 	public static final String ITEM_CATEGORY_ID_BY_NAME = "select itemcategoryid from ItemCategory where itemcategoryname like :itemCategoryName";
 
 	public static final String ITEM_ID_BY_NAME = "select itemid from Items where itemname like  :itemname";
+
+	public static final String CONFIRM_ORDER = "update CustomerOrder set orderStatus = :orderStatus where customerid = :customerid";
 }
