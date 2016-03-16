@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.sig.team.webworks.ekirana.crud.entity.Items;
 import com.sig.team.webworks.ekirana.dao.ItemDAO;
+import com.sig.team.webworks.ekirana.model.CustomersOrder;
 import com.sig.team.webworks.ekirana.model.ItemCategoryId;
 import com.sig.team.webworks.ekirana.model.ItemsInfo;
 import com.sig.team.webworks.ekirana.service.ItemService;
@@ -23,11 +24,6 @@ public class ItemServiceImpl implements ItemService {
 		return itemDao.getDistinctUnit();
 	}
 
-	/*@Override
-	public GroceryCategory getGroceryCategory(String categoryName) {
-		return itemDao.getGroceryCategory(categoryName);
-	}
-*/
 	@Override
 	public boolean isGetGroceryCategoyExist(String grocerycategoryname) {
 		return itemDao.isGetGroceryCategoyExist(grocerycategoryname);
@@ -62,6 +58,11 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public ItemCategoryId getItemsName(ItemsInfo entity) {
 		return itemDao.getItemsName(entity);
+	}
+
+	@Override
+	public List<CustomersOrder> getOrderTotal(Integer customerid) {
+		return itemDao.getOrderTotal(customerid);
 	}
 
 	

@@ -16,6 +16,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,6 +33,7 @@ import com.sig.team.webworks.ekirana.crud.repository.GroceryCategoryRepository;
 import com.sig.team.webworks.ekirana.crud.repository.ImageRepository;
 import com.sig.team.webworks.ekirana.crud.repository.ItemCategoryRepository;
 import com.sig.team.webworks.ekirana.crud.repository.ItemsRepository;
+import com.sig.team.webworks.ekirana.model.CustomersOrder;
 import com.sig.team.webworks.ekirana.model.ItemCategoryId;
 import com.sig.team.webworks.ekirana.model.ItemsInfo;
 import com.sig.team.webworks.ekirana.model.ItemsWithImage;
@@ -68,7 +70,7 @@ public class ItemController {
 		return itemService.getDistinctUnit();
 	}
 
-	// yogesh
+	
 	@RequestMapping(value = "/itemImageUpload", method = RequestMethod.POST)
 	public @ResponseBody Image itemImageUpload(MultipartFile file,
 			HttpServletRequest request) throws RestException {
@@ -186,14 +188,17 @@ public class ItemController {
 	}
 
 	@RequestMapping(value = "/searchItem", method = RequestMethod.GET)
-	public @ResponseBody List<Items> searchItem(String name)
-			throws RestException {
+	public @ResponseBody List<Items> searchItem(String name)throws RestException {
 		return itemService.searchItem(name);
 	}
 
 	@RequestMapping(value = "/getitemcategorybyid", method = RequestMethod.POST)
-	public ItemCategoryId getItemsName(@RequestBody ItemsInfo entity)
-			throws RestException {
+	public ItemCategoryId getItemsName(@RequestBody ItemsInfo entity)throws RestException {
 		return itemService.getItemsName(entity);
+	}
+	
+	@RequestMapping(value = "/getOrderTotal",  method = RequestMethod.GET)
+ 	public List<CustomersOrder> getOrderTotal(@RequestParam("customerid") Integer customerid)throws RestException{
+		return itemService.getOrderTotal(customerid);
 	}
 }
