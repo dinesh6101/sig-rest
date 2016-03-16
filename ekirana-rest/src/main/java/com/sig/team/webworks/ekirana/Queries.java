@@ -16,5 +16,11 @@ public class Queries {
 
 	public static final String CANCEL_ORDER = "update CustomerOrder set orderStatus = :orderStatus, comments = :comment, orderCancelDate = :ordercanceldate where customerid = :customerid";
 
-	
+	public static final String ORDER_STATUS = "select distinct a.itemid, p.cost as itemUnitPriceWithoutDiscount, "
+			+ "a.discountinperentage, (p.cost*(a.discountinperentage/100)) as savedCost,"
+			+ "(p.cost-(p.cost*(a.discountinperentage/100))) as itemUnitPriceWithDiscount from Item_Offers as a "
+			+ "Inner Join Items as p on a.itemid = p.itemid where a.itemid IN "
+			+ "(select b.itemid from customer_order as b where b.orderStatus = 'PRE_PLACED' and customerid = :customerid)"
+			+ "order by a.itemid"; 
+			
 }

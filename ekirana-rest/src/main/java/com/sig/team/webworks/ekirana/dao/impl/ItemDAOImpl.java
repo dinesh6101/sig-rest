@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import com.sig.team.webworks.ekirana.Queries;
 import com.sig.team.webworks.ekirana.crud.entity.Items;
 import com.sig.team.webworks.ekirana.dao.ItemDAO;
+import com.sig.team.webworks.ekirana.model.CustomersOrder;
 import com.sig.team.webworks.ekirana.model.ItemCategoryId;
 import com.sig.team.webworks.ekirana.model.ItemsInfo;
 import com.sig.team.webworks.ekirana.model.KeyAndValues;
@@ -25,6 +26,7 @@ public class ItemDAOImpl implements ItemDAO {
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	@SuppressWarnings("unused")
 	private static final Logger LOGGER = Logger.getLogger(ItemDAOImpl.class);
 
 	@Override
@@ -104,8 +106,7 @@ public class ItemDAOImpl implements ItemDAO {
 	}
 
 	@Override
-	public Items getItemsDetail(String grocerycategoryname,
-			String itemcategoryname, String itemsname) {
+	public Items getItemsDetail(String grocerycategoryname,String itemcategoryname, String itemsname) {
 		String query = "select itemid from Items where grocerycategoryid in (select grocerycategoryid from GroceryCategory where grocerycategoryname "
 				+ " like :?) or itemcategoryid in (select itemcategoryid from ItemCategory where itemcategoryname like :? "
 				+ "itemid in (select itemid from Items where itemname like : ?)";
@@ -125,8 +126,7 @@ public class ItemDAOImpl implements ItemDAO {
 		for (String groceryCategoryName : entity.getGroceryCategoryName()) {
 			String query = Queries.GROCERY_CATEGORY_ID_BY_NAME;
 			Query typedQuery = entityManager.createQuery(query);
-			typedQuery.setParameter("groceryCategoryName",
-					StringUtil.replaceDash(groceryCategoryName));
+			typedQuery.setParameter("groceryCategoryName",StringUtil.replaceDash(groceryCategoryName));
 			List<Object[]> queryResult = avoidNoResultExceptionForSingleResult(typedQuery);
 			if (queryResult != null) {
 				for (Object[] keyAndValues : queryResult) {
@@ -142,8 +142,7 @@ public class ItemDAOImpl implements ItemDAO {
 		for (String itemCategoryName : entity.getItemCategoryName()) {
 			String query = Queries.ITEM_CATEGORY_ID_BY_NAME;
 			Query typedQuery = entityManager.createQuery(query);
-			typedQuery.setParameter("itemCategoryName",
-					StringUtil.replaceDash(itemCategoryName));
+			typedQuery.setParameter("itemCategoryName",StringUtil.replaceDash(itemCategoryName));
 			List<Object[]> queryResult = avoidNoResultExceptionForSingleResult(typedQuery);
 			if (queryResult != null) {
 				for (Object[] keyAndValues : queryResult) {
@@ -159,8 +158,7 @@ public class ItemDAOImpl implements ItemDAO {
 		for (String itemname : entity.getItemName()) {
 			String query = Queries.ITEM_ID_BY_NAME;
 			Query typedQuery = entityManager.createQuery(query);
-			typedQuery.setParameter("itemname",
-					StringUtil.replaceDash(itemname));
+			typedQuery.setParameter("itemname",StringUtil.replaceDash(itemname));
 			List<Object[]> queryResult = avoidNoResultExceptionForSingleResult(typedQuery);
 			if (queryResult != null) {
 				for (Object[] keyAndValues : queryResult) {
@@ -180,11 +178,34 @@ public class ItemDAOImpl implements ItemDAO {
 	private List<Object[]> avoidNoResultExceptionForSingleResult(
 			Query typedQuery) {
 		try {
+			@SuppressWarnings("unchecked")
 			List<Object[]> resultList = typedQuery.getResultList();
 			return resultList;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CustomersOrder> getOrderTotal(Integer customerid) {
+		String query = Queries.ORDER_STATUS;
+		Query typedQuery = entityManager.createNativeQuery(query);
+		typedQuery.setParameter("customerid", customerid);
+		List<Object[]> resultList = typedQuery.getResultList();
+		List<CustomersOrder> customerOrder = new ArrayList<CustomersOrder>();
+		for(Object[] obj : resultList){
+			CustomersOrder customersOrder = new CustomersOrder();
+			customersOrder.setItemId(Integer.parseInt(obj[0].toString()));
+			customersOrder.setItemUnitPriceWithoutDiscount(Double.parseDouble(obj[1].toString()));
+			customersOrder.setDiscountInPerentage(Double.parseDouble(obj[2].toString()));
+			customersOrder.setSavedCost(Double.parseDouble(obj[3].toString()));
+			customersOrder.setItemUnitPriceWithDiscount(Double.parseDouble(obj[4].toString()));
+			customerOrder.add(customersOrder);
+		}
+		return customerOrder;
 	}
 }
