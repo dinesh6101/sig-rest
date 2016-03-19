@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.sig.team.webworks.ekirana.crud.entity.Items;
 import com.sig.team.webworks.ekirana.dao.ItemDAO;
-import com.sig.team.webworks.ekirana.model.CustomersOrder;
+import com.sig.team.webworks.ekirana.model.CustomerOrderTotal;
 import com.sig.team.webworks.ekirana.model.ItemCategoryId;
 import com.sig.team.webworks.ekirana.model.ItemsInfo;
 import com.sig.team.webworks.ekirana.service.ItemService;
@@ -61,7 +61,7 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public List<CustomersOrder> getOrderTotal(Integer customerid) {
+	public CustomerOrderTotal getOrderTotal(Integer customerid) {
 		return itemDao.getOrderTotal(customerid);
 	}
 

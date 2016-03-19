@@ -23,4 +23,7 @@ public class Queries {
 			+ "(select b.itemid from customer_order as b where b.orderStatus = 'PRE_PLACED' and customerid = :customerid)"
 			+ "order by a.itemid"; 
 			
+	public static final String GET_DISCOUNT_COUPON = "select d.coupon_code,c.orderTrackId custorderTrackId from customer_order as c join customer_order_coupon as d " 
+								+" join discount_coupon as f " 
+								+" where c.orderTrackId=d.orderTrackId  and d.coupon_code=f.coupon_code and c.customerId= :customerid ";
 }

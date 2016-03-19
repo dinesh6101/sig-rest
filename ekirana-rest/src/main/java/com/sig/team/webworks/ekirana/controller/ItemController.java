@@ -33,7 +33,7 @@ import com.sig.team.webworks.ekirana.crud.repository.GroceryCategoryRepository;
 import com.sig.team.webworks.ekirana.crud.repository.ImageRepository;
 import com.sig.team.webworks.ekirana.crud.repository.ItemCategoryRepository;
 import com.sig.team.webworks.ekirana.crud.repository.ItemsRepository;
-import com.sig.team.webworks.ekirana.model.CustomersOrder;
+import com.sig.team.webworks.ekirana.model.CustomerOrderTotal;
 import com.sig.team.webworks.ekirana.model.ItemCategoryId;
 import com.sig.team.webworks.ekirana.model.ItemsInfo;
 import com.sig.team.webworks.ekirana.model.ItemsWithImage;
@@ -198,7 +198,7 @@ public class ItemController {
 	}
 	
 	@RequestMapping(value = "/getOrderTotal",  method = RequestMethod.GET)
- 	public List<CustomersOrder> getOrderTotal(@RequestParam("customerid") Integer customerid)throws RestException{
+ 	public CustomerOrderTotal getOrderTotal(@RequestParam("customerid") Integer customerid)throws RestException{
 		return itemService.getOrderTotal(customerid);
 	}
 }

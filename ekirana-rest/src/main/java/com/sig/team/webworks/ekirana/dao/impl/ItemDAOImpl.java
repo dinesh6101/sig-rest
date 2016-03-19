@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import com.sig.team.webworks.ekirana.Queries;
 import com.sig.team.webworks.ekirana.crud.entity.Items;
 import com.sig.team.webworks.ekirana.dao.ItemDAO;
+import com.sig.team.webworks.ekirana.model.CustomerOrderTotal;
 import com.sig.team.webworks.ekirana.model.CustomersOrder;
 import com.sig.team.webworks.ekirana.model.ItemCategoryId;
 import com.sig.team.webworks.ekirana.model.ItemsInfo;
@@ -33,20 +34,25 @@ public class ItemDAOImpl implements ItemDAO {
 	public List<String> getDistinctUnit() {
 
 		String query = "SELECT distinct unit from Items";
-		TypedQuery<String> typedQuery = entityManager.createQuery(query, String.class);
+		TypedQuery<String> typedQuery = entityManager.createQuery(query,
+				String.class);
 		List<String> results = typedQuery.getResultList();
 
 		return results;
 	}
 
 	/*
-	 * @Override public GroceryCategory getGroceryCategory(String categoryName) { javax.persistence.Query query = entityManager.createNamedQuery("GroceryCategory.getByName");
-	 * query.setParameter("name", categoryName); return (GroceryCategory) query.getSingleResult(); }
+	 * @Override public GroceryCategory getGroceryCategory(String categoryName)
+	 * { javax.persistence.Query query =
+	 * entityManager.createNamedQuery("GroceryCategory.getByName");
+	 * query.setParameter("name", categoryName); return (GroceryCategory)
+	 * query.getSingleResult(); }
 	 */
 	@Override
 	public boolean isGetGroceryCategoyExist(String grocerycategoryname) {
 		String query = "SELECT count(*) from GroceryCategory where grocerycategoryname like ?";
-		TypedQuery<Long> typedQuery = entityManager.createQuery(query, Long.class).setParameter(1, grocerycategoryname);
+		TypedQuery<Long> typedQuery = entityManager.createQuery(query,
+				Long.class).setParameter(1, grocerycategoryname);
 		Long results = typedQuery.getSingleResult();
 
 		if (results.intValue() > 0)
@@ -58,7 +64,8 @@ public class ItemDAOImpl implements ItemDAO {
 	@Override
 	public boolean isGetItemCategoryExist(String itemcategoryname) {
 		String query = "SELECT count(*) from ItemCategory where itemcategoryname like ?";
-		TypedQuery<Long> typedQuery = entityManager.createQuery(query, Long.class).setParameter(1, itemcategoryname);
+		TypedQuery<Long> typedQuery = entityManager.createQuery(query,
+				Long.class).setParameter(1, itemcategoryname);
 		Long results = typedQuery.getSingleResult();
 
 		if (results.intValue() > 0)
@@ -70,7 +77,8 @@ public class ItemDAOImpl implements ItemDAO {
 	@Override
 	public boolean isGetItemTypeExist(String itemtypename) {
 		String query = "SELECT count(*) from ItemType where itemtypename like ?";
-		TypedQuery<Long> typedQuery = entityManager.createQuery(query, Long.class).setParameter(1, itemtypename);
+		TypedQuery<Long> typedQuery = entityManager.createQuery(query,
+				Long.class).setParameter(1, itemtypename);
 		Long results = typedQuery.getSingleResult();
 
 		if (results.intValue() > 0)
@@ -82,7 +90,8 @@ public class ItemDAOImpl implements ItemDAO {
 	@Override
 	public boolean isGetBrandExist(String brandname) {
 		String query = "SELECT count(*) from Brand where brandname like ?";
-		TypedQuery<Long> typedQuery = entityManager.createQuery(query, Long.class).setParameter(1, brandname);
+		TypedQuery<Long> typedQuery = entityManager.createQuery(query,
+				Long.class).setParameter(1, brandname);
 		Long results = typedQuery.getSingleResult();
 
 		if (results.intValue() > 0)
@@ -98,7 +107,8 @@ public class ItemDAOImpl implements ItemDAO {
 				+ " like :name or itemsubname "
 				+ " like :name or itemid in (select itemid from ItemBrand, Brand where ItemBrand.brandid = Brand.brandid and Brand.brandname "
 				+ " like :name)";
-		TypedQuery<Items> typedQuery = entityManager.createQuery(query, Items.class);
+		TypedQuery<Items> typedQuery = entityManager.createQuery(query,
+				Items.class);
 		typedQuery.setParameter("name", "%" + name + "%");
 		List<Items> results = typedQuery.getResultList();
 		return results;
@@ -106,11 +116,13 @@ public class ItemDAOImpl implements ItemDAO {
 	}
 
 	@Override
-	public Items getItemsDetail(String grocerycategoryname,String itemcategoryname, String itemsname) {
+	public Items getItemsDetail(String grocerycategoryname,
+			String itemcategoryname, String itemsname) {
 		String query = "select itemid from Items where grocerycategoryid in (select grocerycategoryid from GroceryCategory where grocerycategoryname "
 				+ " like :?) or itemcategoryid in (select itemcategoryid from ItemCategory where itemcategoryname like :? "
 				+ "itemid in (select itemid from Items where itemname like : ?)";
-		TypedQuery<Items> typedQuery = entityManager.createQuery(query, Items.class);
+		TypedQuery<Items> typedQuery = entityManager.createQuery(query,
+				Items.class);
 		typedQuery.setParameter(1, grocerycategoryname);
 		typedQuery.setParameter(2, itemcategoryname);
 		typedQuery.setParameter(3, itemsname);
@@ -142,7 +154,8 @@ public class ItemDAOImpl implements ItemDAO {
 		for (String itemCategoryName : entity.getItemCategoryName()) {
 			String query = Queries.ITEM_CATEGORY_ID_BY_NAME;
 			Query typedQuery = entityManager.createQuery(query);
-			typedQuery.setParameter("itemCategoryName",StringUtil.replaceDash(itemCategoryName));
+			typedQuery.setParameter("itemCategoryName",
+					StringUtil.replaceDash(itemCategoryName));
 			List<Object[]> queryResult = avoidNoResultExceptionForSingleResult(typedQuery);
 			if (queryResult != null) {
 				for (Object[] keyAndValues : queryResult) {
@@ -175,8 +188,7 @@ public class ItemDAOImpl implements ItemDAO {
 		return itemsCategoryId;
 	}
 
-	private List<Object[]> avoidNoResultExceptionForSingleResult(
-			Query typedQuery) {
+	private List<Object[]> avoidNoResultExceptionForSingleResult(Query typedQuery) {
 		try {
 			@SuppressWarnings("unchecked")
 			List<Object[]> resultList = typedQuery.getResultList();
@@ -187,25 +199,40 @@ public class ItemDAOImpl implements ItemDAO {
 		return null;
 	}
 
-	
-	
+	Double cost =0.0;
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<CustomersOrder> getOrderTotal(Integer customerid) {
+	public CustomerOrderTotal getOrderTotal(Integer customerid) {
 		String query = Queries.ORDER_STATUS;
 		Query typedQuery = entityManager.createNativeQuery(query);
 		typedQuery.setParameter("customerid", customerid);
 		List<Object[]> resultList = typedQuery.getResultList();
+		CustomerOrderTotal customerOrderTotals = new CustomerOrderTotal();
+		
 		List<CustomersOrder> customerOrder = new ArrayList<CustomersOrder>();
-		for(Object[] obj : resultList){
+		for (Object[] obj : resultList) {
 			CustomersOrder customersOrder = new CustomersOrder();
 			customersOrder.setItemId(Integer.parseInt(obj[0].toString()));
 			customersOrder.setItemUnitPriceWithoutDiscount(Double.parseDouble(obj[1].toString()));
 			customersOrder.setDiscountInPerentage(Double.parseDouble(obj[2].toString()));
 			customersOrder.setSavedCost(Double.parseDouble(obj[3].toString()));
 			customersOrder.setItemUnitPriceWithDiscount(Double.parseDouble(obj[4].toString()));
+			cost += customersOrder.getItemUnitPriceWithDiscount();
 			customerOrder.add(customersOrder);
 		}
-		return customerOrder;
+		
+		
+			String query1 = Queries.GET_DISCOUNT_COUPON;
+			Query typedQuery2 = entityManager.createNativeQuery(query1);
+			typedQuery2.setParameter("customerid", customerid);
+			List<Object[]> result = typedQuery2.getResultList();
+			for(Object[] obj : result){
+				customerOrderTotals.setCouponCode(obj[0].toString());
+				customerOrderTotals.setOrderTrackId(Integer.parseInt(obj[1].toString()));			
+			}
+				
+		customerOrderTotals.setTotalCost(cost);
+		customerOrderTotals.setCustomersOrder(customerOrder);
+		return customerOrderTotals;
 	}
 }

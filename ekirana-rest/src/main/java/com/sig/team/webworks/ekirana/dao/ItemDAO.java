@@ -3,7 +3,7 @@ package com.sig.team.webworks.ekirana.dao;
 import java.util.List;
 
 import com.sig.team.webworks.ekirana.crud.entity.Items;
-import com.sig.team.webworks.ekirana.model.CustomersOrder;
+import com.sig.team.webworks.ekirana.model.CustomerOrderTotal;
 import com.sig.team.webworks.ekirana.model.ItemCategoryId;
 import com.sig.team.webworks.ekirana.model.ItemsInfo;
 
@@ -28,5 +28,5 @@ public interface ItemDAO {
 
 	ItemCategoryId getItemsName(ItemsInfo entity);
 
-	List<CustomersOrder> getOrderTotal(Integer customerid);
+	CustomerOrderTotal getOrderTotal(Integer customerid);
 }

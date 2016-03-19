@@ -4,19 +4,29 @@ import java.util.List;
 
 public class CustomerOrderTotal {
 
-	private Integer customerId;
 	private List<CustomersOrder> customersOrder;
-	private Integer totalCalculatedWithoutCoupon;
 	private String couponCode;
-	private Integer totalCalculatedWithCoupon;
+	private Double totalCost;
+	private Integer orderTrackId;
+	
+	
 
-	public Integer getCustomerId() {
-		return customerId;
+	public Integer getOrderTrackId() {
+		return orderTrackId;
 	}
 
-	public void setCustomerId(Integer customerId) {
-		this.customerId = customerId;
+	public void setOrderTrackId(Integer orderTrackId) {
+		this.orderTrackId = orderTrackId;
 	}
+
+	public Double getTotalCost() {
+		return totalCost;
+	}
+
+	public void setTotalCost(Double totalCost) {
+		this.totalCost = totalCost;
+	}
+
 
 	public List<CustomersOrder> getCustomersOrder() {
 		return customersOrder;
@@ -26,14 +36,7 @@ public class CustomerOrderTotal {
 		this.customersOrder = customersOrder;
 	}
 
-	public Integer getTotalCalculatedWithoutCoupon() {
-		return totalCalculatedWithoutCoupon;
-	}
-
-	public void setTotalCalculatedWithoutCoupon(Integer totalCalculatedWithoutCoupon) {
-		this.totalCalculatedWithoutCoupon = totalCalculatedWithoutCoupon;
-	}
-
+	
 	public String getCouponCode() {
 		return couponCode;
 	}
@@ -42,12 +45,5 @@ public class CustomerOrderTotal {
 		this.couponCode = couponCode;
 	}
 
-	public Integer getTotalCalculatedWithCoupon() {
-		return totalCalculatedWithCoupon;
-	}
-
-	public void setTotalCalculatedWithCoupon(Integer totalCalculatedWithCoupon) {
-		this.totalCalculatedWithCoupon = totalCalculatedWithCoupon;
-	}
-
+	
 }
